@@ -17,7 +17,7 @@
 AWS t2.maicro Linux (mem:1GB swap:2GB)にて開発・動作確認
 Python3.6+ (Python 3.0系なら問題ないと思います)
 
-##インストール
+## インストール
 
 ```
 $ git clone git@github.com:anmonite/expression_trans.git
@@ -25,7 +25,7 @@ $ cd expression_trans
 $ pip install -e .
 ```
 
-##使い方
+## 使い方
 - command:
     $ python3 expression_trans.py
     INPUT TEXT (exit = n) > 私が惚れたら困ります。
@@ -134,7 +134,7 @@ $ cd expression_trans
 $ pip install -e .
 ```
 
-##Usage
+## Usage
 - command:
     $ python3 expression_trans.py
     INPUT TEXT (exit = n) > 私が惚れたら困ります。
