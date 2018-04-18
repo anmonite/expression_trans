@@ -15,10 +15,10 @@ import verb_conjugate
 class expressionTranslate:
 
     # constructor
-    def __init__(self, logging=False, model_path='holo', instance=None):
+    def __init__(self, vorbose=False, model_path='holo', instance=None):
         # for input
         self.model_path = model_path
-        self.logging = logging
+        self.vorbose = vorbose
         self.instance = instance
 
         # for works
@@ -173,7 +173,7 @@ class expressionTranslate:
     def __del__(self):
         # for input
         self.model_path = ''
-        self.logging = False
+        self.vorbose = False
         self.instance = None
 
         # for works
@@ -231,10 +231,11 @@ class expressionTranslate:
 
         return __safety_text
 
-    # print log with switching output std.out each part or only logging
+    # print vorbose log with switching output std.out each part or only logging
     def printLog(self, *arg):
-        if self.logging:
+        if self.vorbose:
             print(*arg)
+
         self.process_log += str(*arg) + '\n'
 
         return self
@@ -245,9 +246,6 @@ class expressionTranslate:
         .. py:classmethod:: splitToken(self, token)
 
             get each analized elements from token line
-
-            :param
-
         """
 
         self.elements = re.split(r'[\t,]', token)
@@ -266,9 +264,7 @@ class expressionTranslate:
 
     # execute Sudachi tokenizer
     def execSudachiTokenizer(self, text):
-        """
-            execute Sudachi tokenizer
-        """
+        """ execute Sudachi tokenizer """
 
         #exec tokenizer
         for self.tokens in self.instance.tokenize('C', text):
@@ -801,10 +797,10 @@ if __name__ == '__main__':
     mode = False
     if len(sys.argv) == 1:
         mode = False
-    elif sys.argv[1] == '-l':
+    elif sys.argv[1] == '-v':
         mode = True
     else:
-        print('illigal option: -l - Output processing log.')
+        print('illigal option: -v - Output processing log.')
         exit()
 
     # token analizer by Sudachi
@@ -825,9 +821,11 @@ if __name__ == '__main__':
         # init instance
         t = expressionTranslate(mode, 'holo', __instance)
 
+        print('\nOriginal text: \n-----\n%s\n-----\n' % original_text)
+
         # translate whole text
         translated_text = t.translateText(original_text).translated_text
+        if mode is False:
+            print('Processing log: \n%s-----' % t.process_log)
 
-        print('\nOriginal text: \n-----\n%s\n-----' % original_text)
-        print('Processing log: \n%s-----' % t.process_log)
-        print('Translated text: \n-----\n%s\n-----' % translated_text)
+        print('\nTranslated text: \n-----\n%s\n-----\n' % translated_text)
