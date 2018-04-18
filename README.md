@@ -27,6 +27,7 @@ $ pip install -e .
 
 ## 使い方
 - command:
+```
     $ python3 expression_trans.py
     INPUT TEXT (exit = n) > 私が惚れたら困ります。
     
@@ -85,6 +86,7 @@ $ pip install -e .
     わっちが惚れたら困りんす。
     -----
     INPUT TEXT (exit = n) > 
+```
 
 - code:
     from sudachipy import config
@@ -139,6 +141,7 @@ $ pip install -e .
 
 ## Usage
 - command:
+```
     $ python3 expression_trans.py
     INPUT TEXT (exit = n) > 私が惚れたら困ります。
     
@@ -197,6 +200,7 @@ $ pip install -e .
     わっちが惚れたら困りんす。
     -----
     INPUT TEXT (exit = n) > 
+```
 
 - code:
     from sudachipy import config
