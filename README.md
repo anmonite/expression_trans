@@ -105,6 +105,9 @@ $ pip install -e .
 - result:
     "わっちが惚れたら困りんす。"
 
+## オプション
+- -v : 変換中の詳細ログを出力
+
 -----
 # expression_trans
 This Python package is to translate Japanese text along the expression converting model with using Sudachipy as a morphological tokenizer.
@@ -213,4 +216,7 @@ $ pip install -e .
 
 - result:
     "わっちが惚れたら困りんす。"
+
+## Options
+- -v : output vorbose log when in processing
 
