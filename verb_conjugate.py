@@ -27,6 +27,7 @@ class verbConjugate:
         # 結果用
         self.wordDic = ''
         self.PoW_MA = False    # 撥音便「ん」変換用：送り仮名 マ行
+        self.process_log =''
 
         return None
 
