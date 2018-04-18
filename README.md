@@ -89,6 +89,7 @@ $ pip install -e .
 ```
 
 - code:
+```
     from sudachipy import config
     from sudachipy import dictionary
     from expression_trans import expressionTranslate
@@ -103,6 +104,7 @@ $ pip install -e .
     ex_trans = expressionTranslate(False, 'holo', sudachi_instance)
     translated_text = ex_trans.translateText(input_text).translated_text
     print(translated_text)
+```
 
 - result:
     "わっちが惚れたら困りんす。"
@@ -203,6 +205,7 @@ $ pip install -e .
 ```
 
 - code:
+```
     from sudachipy import config
     from sudachipy import dictionary
     from expression_trans import expressionTranslate
@@ -217,6 +220,7 @@ $ pip install -e .
     ex_trans = expressionTranslate(False, 'holo', sudachi_instance)
     translated_text = ex_trans.translateText(input_text).translated_text
     print(translated_text)
+```
 
 - result:
     "わっちが惚れたら困りんす。"
