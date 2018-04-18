@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 class verbConjugate:
-    def __init__(self, logging=False):
+    def __init__(self, vorbose=False):
         # 入力用
-        self.logging = logging
+        self.vorbose = vorbose
         self.word = ''
         self.word_after = ''
         self.fold = ''
@@ -30,10 +30,14 @@ class verbConjugate:
 
         return None
 
-    # print log with switching output or not
+    # print vorbose log with switching output std.out each part or only logging
     def printLog(self, *arg):
-        if self.logging:
+        if self.vorbose:
             print(*arg)
+
+        self.process_log += str(*arg) + '\n'
+
+        return self
 
     def Conjugate(self, word, after='*', fold='*', form='*'):
         # 入力単語
@@ -232,10 +236,10 @@ if __name__ == '__main__':
     mode = False
     if len(sys.argv) == 1:
         mode = False
-    elif sys.argv[1] == '-l':
+    elif sys.argv[1] == '-v':
         mode = True
     else:
-        print('illigal option: -l - Output processing log.')
+        print('illigal option: -v - Output processing log.')
         exit()
 
     w = verbConjugate(mode)
