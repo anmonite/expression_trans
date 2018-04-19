@@ -1,5 +1,5 @@
 # expression_trans
-このPythonパッケージは、日本語テキストを形態素解析モジュール"[Sudachipy](https://github.com/WorksApplications/SudachiPy)"を利用して解析し、指定した変換モデルに従って口調変換するものです。
+このPythonパッケージは、日本語テキストを形態素解析モジュール"[SudachiPy](https://github.com/WorksApplications/SudachiPy)"を利用して解析し、指定した変換モデルに従って口調変換するものです。
 
 標準の口調変換モデルは、アニメ「狼と香辛料」の"ホロ"の花魁風言葉ですw
 
@@ -8,12 +8,12 @@
 開発の経緯はQiitaに投稿した「[雑談ボットの応答テキストを「狼と香辛料」のホロの花魁言葉っぽい口調にした](https://qiita.com/anmorenight/items/3be08333d85648faad43)」をご覧ください。
 
 ## 機能
-日本語テキストを"Sudachipy"で形態素解析し、口調変換モデルのパターンファイル(json)の定義に従って文言を置換して口調を変換します。
+日本語テキストを"SudachiPy"で形態素解析し、口調変換モデルのパターンファイル(json)の定義に従って文言を置換して口調を変換します。
 
 - カスタムモデル
     + 新たなjsonパターンファイルを作成することで他の口調モデルを選択できます。
       (例、他のアニメキャラクターや方言など)
-- 確認用に、"Sudachipy"による形態素解析結果だけを返すこともできます。
+- 確認用に、"SudachiPy"による形態素解析結果だけを返すこともできます。
 
 ## 動作確認環境
 
@@ -117,7 +117,7 @@ $ pip install -e .
 
 -----
 # expression_trans
-This Python package is to translate Japanese text along the expression converting model with using "[Sudachipy](https://github.com/WorksApplications/SudachiPy)" as a morphological tokenizer.
+This Python package is to translate Japanese text along the expression converting model with using "[SudachiPy](https://github.com/WorksApplications/SudachiPy)" as a morphological tokenizer.
 
 The default converting model is a heroine of "Spice and Wolf" in a Japanese anime named "Holo" with its speaking tone like an geisha girl. :)
 
@@ -127,13 +127,13 @@ Please refer to the article "[雑談ボットの応答テキストを「狼と�
 
 
 ## Features
-Morphologically analyze Japanese text with "Sudachipy" and convert the tone by replacing the words according to the definition of the pattern file (json) of the tone conversion model.
+Morphologically analyze Japanese text with "SudachiPy" and convert the tone by replacing the words according to the definition of the pattern file (json) of the tone conversion model.
 
 - Custom model
     + You can choice the other convering model if you(or someone) create additional json pattern files.
       (ex. other anime characters or local dialect and so on)
 
-- For confirmation, it is possible to return only the morphological analysis result by "Sudachipy".
+- For confirmation, it is possible to return only the morphological analysis result by "SudachiPy".
 
 ## Environment
 
