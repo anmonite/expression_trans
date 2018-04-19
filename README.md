@@ -5,6 +5,8 @@
 
 オリジナル(Java)の"Sudachi"について詳細はQiitaの[Elasticsearchのための新しい形態素解析器 「Sudachi」](https://qiita.com/sorami/items/99604ef105f13d2d472b)をご覧下さい。
 
+開発の経緯はQiitaに投稿した「[雑談ボットの応答テキストを「狼と香辛料」のホロの花魁言葉っぽい口調にした](https://qiita.com/anmorenight/items/3be08333d85648faad43)」をご覧ください。
+
 ## 機能
 日本語テキストを"Sudachipy"で形態素解析し、口調変換モデルのパターンファイル(json)の定義に従って文言を置換して口調を変換します。
 
@@ -15,8 +17,8 @@
 
 ## 動作確認環境
 
-AWS t2.maicro Linux (mem:1GB swap:2GB)にて開発・動作確認
-Python3.6+ (Python 3.0系なら問題ないと思います)
+- AWS t2.maicro Linux (mem:1GB swap:2GB)にて開発・動作確認
+- Python3.6+ (Python 3.0系なら問題ないと思います)
 
 ## インストール
 
@@ -121,6 +123,8 @@ The default converting model is a heroine of "Spice and Wolf" in a Japanese anim
 
 To see more information about original Java based "Sudachi", please find out [Elasticsearchのための新しい形態素解析器 「Sudachi」](https://qiita.com/sorami/items/99604ef105f13d2d472b) on "Qiita".
 
+Please refer to the article "[雑談ボットの応答テキストを「狼と香辛料」のホロの花魁言葉っぽい口調にした](https://qiita.com/anmorenight/items/3be08333d85648faad43)]" posted on Qiita for the background of development.
+
 
 ## Features
 Morphologically analyze Japanese text with "Sudachipy" and convert the tone by replacing the words according to the definition of the pattern file (json) of the tone conversion model.
@@ -133,8 +137,8 @@ Morphologically analyze Japanese text with "Sudachipy" and convert the tone by r
 
 ## Environment
 
-development on AWS t2.maicro Linux (mem:1GB swap:2GB)
-expression_trans requires Python3.6+. (maybe 3.0+ is avarable)
+- development on AWS t2.maicro Linux (mem:1GB swap:2GB)
+- expression_trans requires Python3.6+. (maybe 3.0+ is avarable)
 
 ## Instruction
 
