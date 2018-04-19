@@ -29,7 +29,7 @@ $ pip install -e .
 ```
 
 ## 使い方
-- command:
+- command line:
 ```
     $ python3 expression_trans.py
     INPUT TEXT (exit = n) > 私が惚れたら困ります。
@@ -90,6 +90,8 @@ $ pip install -e .
     -----
     INPUT TEXT (exit = n) > 
 ```
+- command line option
+  - -v : 変換中の詳細ログを出力
 
 - code:
 ```
@@ -112,8 +114,6 @@ $ pip install -e .
 - result:
     "わっちが惚れたら困りんす。"
 
-## オプション
-- -v : 変換中の詳細ログを出力
 
 -----
 # expression_trans
@@ -210,6 +210,8 @@ $ pip install -e .
     -----
     INPUT TEXT (exit = n) > 
 ```
+- command line option
+  - -v : output vorbose log when in processing
 
 - code:
 ```
@@ -231,7 +233,4 @@ $ pip install -e .
 
 - result:
     "わっちが惚れたら困りんす。"
-
-## Options
-- -v : output vorbose log when in processing
 
