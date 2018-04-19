@@ -1,8 +1,9 @@
 # expression_trans
-このPythonパッケージは、日本語テキストを形態素解析モジュール"Sudachipy"を利用して解析し、指定した変換モデルに従って口調変換するものです。
+このPythonパッケージは、日本語テキストを形態素解析モジュール"[Sudachipy](https://github.com/WorksApplications/SudachiPy)"を利用して解析し、指定した変換モデルに従って口調変換するものです。
 
 標準の口調変換モデルは、アニメ「狼と香辛料」の"ホロ"の花魁風言葉ですw
 
+オリジナル(Java)の"Sudachi"について詳細はQiitaの[Elasticsearchのための新しい形態素解析器 「Sudachi」](https://qiita.com/sorami/items/99604ef105f13d2d472b)をご覧下さい。
 
 ## 機能
 日本語テキストを"Sudachipy"で形態素解析し、口調変換モデルのパターンファイル(json)の定義に従って文言を置換して口調を変換します。
@@ -114,9 +115,11 @@ $ pip install -e .
 
 -----
 # expression_trans
-This Python package is to translate Japanese text along the expression converting model with using Sudachipy as a morphological tokenizer.
+This Python package is to translate Japanese text along the expression converting model with using "[Sudachipy](https://github.com/WorksApplications/SudachiPy)" as a morphological tokenizer.
 
 The default converting model is a heroine of "Spice and Wolf" in a Japanese anime named "Holo" with its speaking tone like an geisha girl. :)
+
+To see more information about original Java based "Sudachi", please find out [Elasticsearchのための新しい形態素解析器 「Sudachi」](https://qiita.com/sorami/items/99604ef105f13d2d472b) on "Qiita".
 
 
 ## Features
