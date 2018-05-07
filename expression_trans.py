@@ -10,7 +10,7 @@ from sudachipy import config
 from sudachipy import dictionary
 
 # import verb cojugation module
-import verb_conjugate
+import expression_trans.verb_conjugate
 
 class expressionTranslate:
 
