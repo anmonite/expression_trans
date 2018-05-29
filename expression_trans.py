@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import json
 import functools
 import re
@@ -10,7 +11,7 @@ from sudachipy import config
 from sudachipy import dictionary
 
 # import verb cojugation module
-import expression_trans.verb_conjugate
+from expression_trans.verb_conjugate.verb_conjugate import verbConjugate
 
 class expressionTranslate:
 
@@ -18,6 +19,7 @@ class expressionTranslate:
     def __init__(self, vorbose=False, model_path='holo', instance=None):
         # for input
         self.model_path = model_path
+        self.ModelsPath = os.path.dirname(__file__) + '/models/' + self.model_path
         self.vorbose = vorbose
         self.instance = instance
 
@@ -67,7 +69,7 @@ class expressionTranslate:
         # loading honorific translation table
         self.honorific_sorted_list = {}
         try:
-            with open('./models/%s/conv_honorific.json' % self.model_path, 'r') as f:
+            with open('%s/conv_honorific.json' % self.ModelsPath, 'r') as f:
                 honorific_data = json.load(f)
                 honorific_list = list(honorific_data.items())
                 # sort by key string length as decending order
@@ -78,7 +80,7 @@ class expressionTranslate:
         # loading specific translation table
         self.specific_sorted_list = {}
         try:
-            with open('./models/%s/conv_specific.json' % self.model_path, 'r') as f:
+            with open('%s/conv_specific.json' % self.ModelsPath, 'r') as f:
                 specific_data = json.load(f)
                 specific_list = list(specific_data.items())
                 # sort by key string length as decending order
@@ -89,7 +91,7 @@ class expressionTranslate:
         # loading noun translation table
         self.noun_sorted_list = {}
         try:
-            with open('./models/%s/conv_noun.json' % self.model_path, 'r') as f:
+            with open('%s/conv_noun.json' % self.ModelsPath, 'r') as f:
                 noun_data = json.load(f)
                 noun_list = list(noun_data.items())
                 # sort by key string length as decending order
@@ -100,7 +102,7 @@ class expressionTranslate:
         # loading interjection translation table
         self.interjection_sorted_list = {}
         try:
-            with open('./models/%s/conv_interjection.json' % self.model_path, 'r') as f:
+            with open('%s/conv_interjection.json' % self.ModelsPath, 'r') as f:
                 interjection_data = json.load(f)
                 interjection_list = list(interjection_data.items())
                 # sort by key string length as decending order
@@ -111,7 +113,7 @@ class expressionTranslate:
         # loading adjective translation table
         self.adjective_list = {}
         try:
-            with open('./models/%s/conv_adjective.json' % self.model_path, 'r') as f:
+            with open('%s/conv_adjective.json' % self.ModelsPath, 'r') as f:
                 adjective_data = json.load(f)
                 self.adjective_list = list(adjective_data.items())
         except json.JSONDecodeError as err:
@@ -120,7 +122,7 @@ class expressionTranslate:
         # loading after adjective translation table
         self.afteradjective_list = {}
         try:
-            with open('./models/%s/conv_afteradjective.json' % self.model_path, 'r') as f:
+            with open('%s/conv_afteradjective.json' % self.ModelsPath, 'r') as f:
                 afteradjective_data = json.load(f)
                 self.afteradjective_list = list(afteradjective_data.items())
         except json.JSONDecodeError as err:
@@ -129,7 +131,7 @@ class expressionTranslate:
         # loading adverb translation table
         self.adverb_sorted_list = {}
         try:
-            with open('./models/%s/conv_adverb.json' % self.model_path, 'r') as f:
+            with open('%s/conv_adverb.json' % self.ModelsPath, 'r') as f:
                 adverb_data = json.load(f)
                 adverb_list = list(adverb_data.items())
                 # sort by key string length as decending order
@@ -140,7 +142,7 @@ class expressionTranslate:
         # loading particle translation table
         self.particle_sorted_list = {}
         try:
-            with open('./models/%s/conv_particle.json' % self.model_path, 'r') as f:
+            with open('%s/conv_particle.json' % self.ModelsPath, 'r') as f:
                 particle_data = json.load(f)
                 particle_list = list(particle_data.items())
                 # sort by key string length as decending order
@@ -151,7 +153,7 @@ class expressionTranslate:
         # loading auxverb translation table
         self.auxverb_sorted_list = {}
         try:
-            with open('./models/%s/conv_auxverb.json' % self.model_path, 'r') as f:
+            with open('%s/conv_auxverb.json' % self.ModelsPath, 'r') as f:
                 auxverb_data = json.load(f)
                 auxverb_list = list(auxverb_data.items())
                 # sort by key string length as decending order
@@ -162,7 +164,7 @@ class expressionTranslate:
         # loading last verb translation table
         self.lastverb_list = {}
         try:
-            with open('./models/%s/conv_lastverb.json' % self.model_path, 'r') as f:
+            with open('%s/conv_lastverb.json' % self.ModelsPath, 'r') as f:
                 lastverb_data = json.load(f)
                 self.lastverb_list = list(lastverb_data.items())
         except json.JSONDecodeError as err:
@@ -173,6 +175,7 @@ class expressionTranslate:
     def __del__(self):
         # for input
         self.model_path = ''
+        self.ModelsPath = ''
         self.vorbose = False
         self.instance = None
 
@@ -189,8 +192,7 @@ class expressionTranslate:
         self.add_fetch_count = 0
 
         # for token processing
-        # IPA dictionary item order "surface\tPoS,c1,c2,c3,type,form[,\t]origin[,\t]read,pron"
-        self.pattern = re.compile(r'[\t,]')
+        self.pattern = ''
         self.elements = []
         self.surface = ''
         self.PoS = ''
@@ -204,7 +206,7 @@ class expressionTranslate:
         self.pron = ''
 
         # for analize auxialiry verb
-        self.pattern_end = re.compile(r'[。、\,\.？！\?\!\s]')
+        self.pattern_end = ''
         self.pre_token = []
         self.after_token = []
         self.next_list_token = []
@@ -531,7 +533,7 @@ class expressionTranslate:
                     return self
 
                 # change verb's form if there is a verb just before this auxiliary verb
-                v_conjugate = verb_conjugate.verbConjugate()
+                v_conjugate = verbConjugate()
                 if __pre_PoS == '動詞':
                     if((__surface_org == 'ましょ') or (__surface_org == 'ます')):
                         __original_verb = __pre_surface
@@ -608,7 +610,7 @@ class expressionTranslate:
                         if __form != self.lastverb_list[j][0]:
                             continue
                         else:
-                            v_conjugate = verb_conjugate.verbConjugate()
+                            v_conjugate = verbConjugate()
                             __formed_verb = v_conjugate.Conjugate(__surface_org, '', __fold, self.lastverb_list[j][1][0])
                             __surface = __formed_verb + self.lastverb_list[j][1][1]
                             self.translated_log += 'Found keyword: "' + __surface_org + '"\n'
@@ -630,7 +632,7 @@ class expressionTranslate:
                     if __form != self.lastverb_list[j][0]:
                         continue
                     else:
-                        v_conjugate = verb_conjugate.verbConjugate()
+                        v_conjugate = verbConjugate()
                         __formed_verb = v_conjugate.Conjugate(__surface_org, '', __fold, self.lastverb_list[j][1][0])
                         __surface = __formed_verb + self.lastverb_list[j][1][1]
                         self.translated_log += 'Found keyword: "' + __surface_org + '"\n'
