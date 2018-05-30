@@ -386,7 +386,7 @@ class expressionTranslate:
             return __surface_org
 
         # not last token but next word is ending symbol or not
-        self.after_token = self.splitToken(self.translated_tokens[pos+1])
+        self.after_token = self.splitToken(self.translated_tokens[pos + 1])
         __after_surface = self.after_token.surface
         __after_PoS = self.after_token.PoS
         __after_form = self.after_token.PoS
@@ -465,7 +465,7 @@ class expressionTranslate:
         if self.auxverb_sorted_list == {}:
             return __surface
 
-        self.pre_token = self.splitToken(self.translated_tokens[self.pos-1])
+        self.pre_token = self.splitToken(self.translated_tokens[self.pos - 1])
         __pre_surface = self.pre_token.surface
         __pre_PoS = self.pre_token.PoS
         __pre_read = self.pre_token.read
@@ -477,7 +477,7 @@ class expressionTranslate:
             return self
 
         # check succeeding words
-        self.after_token = self.splitToken(self.translated_tokens[self.pos+1])
+        self.after_token = self.splitToken(self.translated_tokens[self.pos + 1])
         __after_surface = self.after_token.surface
         __after_PoS = self.after_token.PoS
         __after_c1 = self.after_token.c1
@@ -508,10 +508,10 @@ class expressionTranslate:
 
                     # make connected strings after current position in text
                     __next_words = ''
-                    __max_pos = max_pos if ((self.pos+1+__num_next_list_words) > max_pos) else (self.pos+1+__num_next_list_words)
-                    for k in range(self.pos+1, __max_pos):
+                    __max_pos = max_pos if ((self.pos + 1 + __num_next_list_words) > max_pos) else (self.pos + 1 + __num_next_list_words)
+                    for k in range(self.pos + 1, __max_pos):
                         # check succeeding words
-                        self.after_token = self.splitToken(self.translated_tokens[self.pos+1])
+                        self.after_token = self.splitToken(self.translated_tokens[self.pos + 1])
                         __after_surface = self.after_token.surface
                         __after_PoS = self.after_token.PoS
                         __after_c1 = self.after_token.c1
@@ -547,7 +547,7 @@ class expressionTranslate:
                         __formed_verb = __pre_surface
 
                     # replace the last verb token surface string
-                    self.translated_surface_list[self.pos-1] = __formed_verb
+                    self.translated_surface_list[self.pos - 1] = __formed_verb
 
                 # replace sueface pattern strings of this auxuialiry verb
                 __surface = __next_list_token[__succeeding_list_pos][1]
@@ -581,7 +581,7 @@ class expressionTranslate:
 
         # last position?
         if pos < max_pos-1:
-            self.after_token = self.splitToken(self.translated_tokens[pos+1])
+            self.after_token = self.splitToken(self.translated_tokens[pos + 1])
             __after_surface = self.after_token.surface
 
             # 五段活用(イ音便以外)+連用形+「ます」
