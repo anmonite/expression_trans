@@ -11,7 +11,7 @@ with open('LICENSE') as f:
 
 setup(
     name='expression_trans',
-    version='0.2.0,
+    version='0.2.0',
     description='This package is to translate Japanese text along the expression converting model with using Sudachi as a morphological tokenizer.',
     long_description=readme,
     author='Norihiro Matsushita',
