@@ -2,16 +2,19 @@
 # -*- coding: utf-8 -*-
 
 import os
+import sys
 import json
 import functools
 import re
 
 # import Sudachi tokenizer with using arranged UniDic and NEologd library
 from sudachipy import config
+from sudachipy import tokenizer
 from sudachipy import dictionary
 
 # import verb cojugation module
-from expression_trans.verb_conjugate.verb_conjugate import verbConjugate
+sys.path.append('%s' % os.path.dirname(os.path.abspath(__file__)))
+from verb_conjugate.verb_conjugate import verbConjugate
 
 class expressionTranslate:
 
@@ -19,7 +22,7 @@ class expressionTranslate:
     def __init__(self, vorbose=False, model_path='holo', instance=None):
         # for input
         self.model_path = model_path
-        self.ModelsPath = os.path.dirname(__file__) + '/models/' + self.model_path
+        self.ModelsPath = os.path.dirname(os.path.abspath(__file__)) + '/models/' + self.model_path
         self.vorbose = vorbose
         self.instance = instance
 
@@ -69,7 +72,7 @@ class expressionTranslate:
         # loading honorific translation table
         self.honorific_sorted_list = {}
         try:
-            with open('%s/conv_honorific.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_honorific.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 honorific_data = json.load(f)
                 honorific_list = list(honorific_data.items())
                 # sort by key string length as decending order
@@ -80,7 +83,7 @@ class expressionTranslate:
         # loading specific translation table
         self.specific_sorted_list = {}
         try:
-            with open('%s/conv_specific.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_specific.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 specific_data = json.load(f)
                 specific_list = list(specific_data.items())
                 # sort by key string length as decending order
@@ -91,7 +94,7 @@ class expressionTranslate:
         # loading noun translation table
         self.noun_sorted_list = {}
         try:
-            with open('%s/conv_noun.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_noun.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 noun_data = json.load(f)
                 noun_list = list(noun_data.items())
                 # sort by key string length as decending order
@@ -102,7 +105,7 @@ class expressionTranslate:
         # loading interjection translation table
         self.interjection_sorted_list = {}
         try:
-            with open('%s/conv_interjection.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_interjection.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 interjection_data = json.load(f)
                 interjection_list = list(interjection_data.items())
                 # sort by key string length as decending order
@@ -113,7 +116,7 @@ class expressionTranslate:
         # loading adjective translation table
         self.adjective_list = {}
         try:
-            with open('%s/conv_adjective.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_adjective.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 adjective_data = json.load(f)
                 self.adjective_list = list(adjective_data.items())
         except json.JSONDecodeError as err:
@@ -122,7 +125,7 @@ class expressionTranslate:
         # loading after adjective translation table
         self.afteradjective_list = {}
         try:
-            with open('%s/conv_afteradjective.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_afteradjective.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 afteradjective_data = json.load(f)
                 self.afteradjective_list = list(afteradjective_data.items())
         except json.JSONDecodeError as err:
@@ -131,7 +134,7 @@ class expressionTranslate:
         # loading adverb translation table
         self.adverb_sorted_list = {}
         try:
-            with open('%s/conv_adverb.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_adverb.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 adverb_data = json.load(f)
                 adverb_list = list(adverb_data.items())
                 # sort by key string length as decending order
@@ -142,7 +145,7 @@ class expressionTranslate:
         # loading particle translation table
         self.particle_sorted_list = {}
         try:
-            with open('%s/conv_particle.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_particle.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 particle_data = json.load(f)
                 particle_list = list(particle_data.items())
                 # sort by key string length as decending order
@@ -153,7 +156,7 @@ class expressionTranslate:
         # loading auxverb translation table
         self.auxverb_sorted_list = {}
         try:
-            with open('%s/conv_auxverb.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_auxverb.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 auxverb_data = json.load(f)
                 auxverb_list = list(auxverb_data.items())
                 # sort by key string length as decending order
@@ -164,7 +167,7 @@ class expressionTranslate:
         # loading last verb translation table
         self.lastverb_list = {}
         try:
-            with open('%s/conv_lastverb.json' % self.ModelsPath, 'r') as f:
+            with open('%s/conv_lastverb.json' % self.ModelsPath, 'r', encoding='utf-8') as f:
                 lastverb_data = json.load(f)
                 self.lastverb_list = list(lastverb_data.items())
         except json.JSONDecodeError as err:
@@ -269,7 +272,7 @@ class expressionTranslate:
         """ execute Sudachi tokenizer """
 
         #exec tokenizer
-        for self.tokens in self.instance.tokenize('C', text):
+        for self.tokens in self.instance.tokenize(text, 'C'):
             __list_info = [
                 self.tokens.surface(),
                 ",".join(self.tokens.part_of_speech()),
@@ -477,15 +480,14 @@ class expressionTranslate:
             return self
 
         # check succeeding words
-        self.after_token = self.splitToken(self.translated_tokens[self.pos + 1])
-        __after_surface = self.after_token.surface
-        __after_PoS = self.after_token.PoS
-        __after_c1 = self.after_token.c1
-
-        # add "ん" after auxialiry verb is "らしい" if succeeding word is "です" or "だ"
-        if __surface_org == 'らしい' and __after_PoS == '助動詞' and __after_surface.find(['です', 'だ']) != -1:
-            __surface = __surface_org + 'ん'
-            __surface_org = __surface
+        if pos < max_pos-1:
+            self.after_token = self.splitToken(self.translated_tokens[self.pos + 1])
+            __after_surface = self.after_token.surface
+            __after_PoS = self.after_token.PoS
+            # add "ん" after auxialiry verb is "らしい" if succeeding word is "です" or "だ"
+            if __surface_org == 'らしい' and __after_PoS == '助動詞' and __after_surface.find(['です', 'だ']) != -1:
+                __surface = __surface_org + 'ん'
+                __surface_org = __surface
 
         # loop of auxverb keyword patterns to replace
         for j in range(len(self.auxverb_sorted_list)):
@@ -526,6 +528,10 @@ class expressionTranslate:
                         __next_strings = __next_list_strings
                         __succeeding_list_pos = i
                         break
+                    elif __next_list_strings == 'EOS' and __next_words == '':
+                        __next_strings = __next_list_strings
+                        __succeeding_list_pos = i
+                        break
 
                 # no match in succeeding words
                 if __next_strings == '':
@@ -538,6 +544,7 @@ class expressionTranslate:
                     if((__surface_org == 'ましょ') or (__surface_org == 'ます')):
                         __original_verb = __pre_surface
                         __formed_verb = v_conjugate.Conjugate(__pre_read, __surface_org, __pre_fold, '終止')
+                        self.translated_log += ("__formed_verb - %s\n" % __formed_verb)
                     elif __surface_org == 'まし':
                         __original_verb = __pre_surface
                         __formed_verb = v_conjugate.Conjugate(__pre_read, __surface_org, __pre_fold, '連用')
@@ -552,12 +559,17 @@ class expressionTranslate:
                 # replace sueface pattern strings of this auxuialiry verb
                 __surface = __next_list_token[__succeeding_list_pos][1]
 
-                # 動詞五段活用・マ行+「まし」+「た+」 > 「ん」+「だ+」
-                if v_conjugate.PoW_MA:
+                # 動詞五段活用・マ行/ナ行/バ行+「まし」+「た+」 > 「ん」+「だ+」
+                if v_conjugate.PoW_NN is True:
                     __surface = re.sub(r'た', 'だ', __surface)
 
-                self.translated_log += 'Found keyword: ({0})+{1}+{2}\n'.format(__original_verb, __surface_org, __next_strings)
-                self.translated_log += 'Translated: ({0})+{1}'.format(__formed_verb, __surface)
+                # store translated log
+                if __original_verb != '':
+                    self.translated_log += 'Found keyword: ({0})+{1}+{2}\n'.format(__original_verb, __surface_org, __next_strings)
+                    self.translated_log += 'Translated: ({0})+{1}'.format(__formed_verb, __surface)
+                else:
+                    self.translated_log += 'Found keyword: {0}+{1}\n'.format(__surface_org, __next_strings)
+                    self.translated_log += 'Translated: {0}'.format(__surface)
                 self.add_fetch_count = __num_next_list_words
                 break
 
@@ -761,7 +773,10 @@ class expressionTranslate:
 
                 __succeeding_surface_list = ''
                 for offset in range(__pos+1, __pos+self.add_fetch_count+1):
-                    __succeeding_surface_list += self.splitToken(__tokens[offset]).surface
+                    if (len(__tokens) > offset) :
+                        __succeeding_surface_list += self.splitToken(__tokens[offset]).surface
+                    else:
+                        break
 
                 if __current_surface != __translated:
                     self.printLog('Translate auxiliary verb token: %s > %s\n' % (__current_surface+__succeeding_surface_list, __translated))
@@ -795,23 +810,19 @@ class expressionTranslate:
 
 if __name__ == '__main__':
     import sys
+    import argparse
+
+    __myarg = argparse.ArgumentParser(prog='expression_trans.py')
+    __myarg.add_argument('-v', '--vorbose', action='store_const', const=True, default=False, help='(%prog)s output vorbose log')
+    __args = __myarg.parse_args()
 
     mode = False
-    if len(sys.argv) == 1:
-        mode = False
-    elif sys.argv[1] == '-v':
+    if __args.vorbose:
         mode = True
-    else:
-        print('illigal option: -v - Output processing log.')
-        exit()
 
     # token analizer by Sudachi
-    with open(config.SETTINGFILE, "r", encoding="utf-8") as f:
-        __sudachi_settings = json.load(f)
-
     # init dictionary
-    __dict = dictionary.Dictionary(__sudachi_settings)
-    __instance = __dict.create()
+    __instance = dictionary.Dictionary().create()
 
     while True:
         input_text = input('INPUT TEXT (exit = n) > ')

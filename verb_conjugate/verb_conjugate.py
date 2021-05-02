@@ -26,7 +26,8 @@ class verbConjugate:
 
         # 結果用
         self.wordDic = ''
-        self.PoW_MA = False    # 撥音便「ん」変換用：送り仮名 マ行
+        self.PoW_NN = False    # 五段活用 撥音便「ん」変換用：送り仮名 マ行/ナ行/バ行
+        self.PoW_TTU = False  # 五段活用 促音便「っ」変換用：送り仮名 タ行/ラ行/ワ行
         self.process_log =''
 
         return None
@@ -191,11 +192,12 @@ class verbConjugate:
 
         elif self.form == '連用':
             __first_part = '五段 %s行 ' % self.char_A[self.num_X]
-            if((self.word in ['行く', 'いく', '蹴る', 'ける', '競る', '照る', 'てる']) or (self.char_A[self.num_X] in ['あ', 'た', 'ら', 'わ'])):
+            if((self.word in ['行く', 'いく', '蹴る', 'ける', '競る', '照る', 'てる', '參る', 'まいる']) or (self.char_A[self.num_X] in ['あ', 'た', 'ら', 'わ'])):
                 if self.word_after == 'た' or self.word_after == 'て':
                     # 五段活用・促音便
                     self.printLog('%s促音便' % __first_part)
                     self.wordDic = self.word_br + 'っ'
+                    self.PoW_TTU = True
                 elif self.word_after != 'ます':
                     # 五段活用・イ音便
                     self.printLog('%sい音便' % __first_part)
@@ -206,7 +208,7 @@ class verbConjugate:
                 # 五段活用・撥音便
                 self.printLog('%s撥音便' % __first_part)
                 self.wordDic = self.word_br + 'ん'
-                self.PoW_MA = True
+                self.PoW_NN = True
             elif self.char_A[self.num_X] in ['か', 'が']:
                 # 五段活用・カ行イ音便
                 self.printLog('%sい音便' % __first_part)
