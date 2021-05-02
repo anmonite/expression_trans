@@ -22,4 +22,3 @@ setup(
     dependency_links=['git+ssh:github.com/WorksApplications/SudachiPy.git#egg=sudachipy'],
     packages=find_packages(exclude=('tests', 'docs', 'sample'))
 )
-
