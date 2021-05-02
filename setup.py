@@ -11,7 +11,7 @@ with open('LICENSE') as f:
 
 setup(
     name='expression_trans',
-    version='0.1.0',
+    version='0.2.1',
     description='This package is to translate Japanese text along the expression converting model with using Sudachi as a morphological tokenizer.',
     long_description=readme,
     author='Norihiro Matsushita',
@@ -20,6 +20,6 @@ setup(
     license=license,
     install_requires=[],
     dependency_links=['git+ssh:github.com/WorksApplications/SudachiPy.git#egg=sudachipy'],
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs', 'sample'))
 )
 

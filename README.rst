@@ -18,7 +18,8 @@
 ## 動作確認環境
 
 - AWS t2.maicro Linux (mem:1GB swap:2GB)にて開発・動作確認
-- Python3.6+ (Python 3.0系なら問題ないと思います)
+- Python3.7+ (Python 3.6以上なら問題ないと思います)
+- SudachiPy v0.5.2以上
 
 ## インストール
 
@@ -134,7 +135,8 @@ Morphologically analyze Japanese text with "SudachiPy" and convert the tone by r
 ## Environment
 
 - development on AWS t2.maicro Linux (mem:1GB swap:2GB)
-- expression_trans requires Python3.6+. (maybe 3.0+ is avarable)
+- requires Python3.7 or later (3.6 may be avarable)
+- requires SudachiPy v0.5.2 or later
 
 ## Instruction
 
